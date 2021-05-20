@@ -1,45 +1,49 @@
 // Functions
-const iniciarApp = () => {
-	disableSubmit();
+const startApp = () => {
 	resetForm();
-	loadEventListeners();
+	showDB();
 };
 const resetForm = () => {
 	formulario.reset();
 };
-const disableSubmit = () => {
-	submit.disabled = true;
-	submit.classList.remove("cursor-allowed");
-	submit.classList.add("opacity-50", "cursor-not-allowed");
-};
-const enableSubmit = () => {
-	submit.disabled = false;
-	submit.classList.add("cursor-allowed");
-	submit.classList.remove("opacity-50", "cursor-not-allowed");
-};
-const validarInput = (e) => {
-	if (e.target.value === "") {
-		disableSubmit();
-	} else {
-		enableSubmit();
+const msjError = () => {
+	const main = document.querySelector("#main");
+	const template = document.querySelector("#template-error").content;
+	const clone = template.cloneNode(true);
+	const section = main.querySelector("#section");
+	if (document.querySelectorAll("#error").length === 0) {
+		main.insertBefore(clone, section);
 	}
 };
-const agregarTarea = (e) => {
-	e.preventDefault();
-	const tarea = {
-		tarea: input.value,
-		id: Date.now(),
-		bgColor: "bg-red",
-	};
-	arrayTareas.push(tarea);
-	mostrarTareas();
+const deleteMsjError = () => {
+	if (document.querySelector("#error")) {
+		document.querySelector("#error").remove();
+	}
 };
-const mostrarTareas = () => {
-	limpiarHTML();
-	const template = document.querySelector("#template").content;
+const addTask = (e) => {
+	e.preventDefault();
+	if (input.value !== "") {
+		deleteMsjError();
+		const tarea = {
+			tarea: input.value,
+			id: Date.now(),
+			bgColor: "bg-red",
+			estado: "pendiente",
+		};
+		arrayTareas.push(tarea);
+		addTasksDB();
+		showDB();
+	} else {
+		msjError();
+	}
+};
+const showDB = () => {
+	getTasksDB();
+	cleanHTML();
+	const template = document.querySelector("#template-tarea").content;
 	const fragment = document.createDocumentFragment();
-	arrayTareas.forEach(({ id, tarea, bgColor }) => {
-		template.querySelector("#paragraph").textContent = tarea;
+	arrayTareas.forEach(({ id, tarea, bgColor, estado }) => {
+		template.querySelector("#paragraph").textContent = `${tarea} -> ${estado}`;
 		template.querySelector("#tarea").setAttribute("data-id", id);
 		template.querySelector("#tarea").classList.remove("bg-red", "bg-green");
 		template.querySelector("#tarea").classList.add(bgColor);
@@ -49,25 +53,27 @@ const mostrarTareas = () => {
 	});
 	listaTareas.appendChild(fragment);
 };
-const limpiarHTML = () => {
+const cleanHTML = () => {
 	while (listaTareas.firstChild) {
 		listaTareas.removeChild(listaTareas.firstChild);
 	}
 };
-const borrarTarea = (e) => {
+const deleteTask = (e) => {
 	if (e.target.getAttribute("id") === "borrar") {
 		const idTarea = parseInt(e.target.parentElement.getAttribute("data-id"));
 		arrayTareas = arrayTareas.filter((tarea) => tarea.id !== idTarea);
-		mostrarTareas();
+		addTasksDB();
+		showDB();
 	}
 };
-const terminarTarea = (e) => {
+const modifyTask = (e) => {
 	if (e.target.getAttribute("id") === "terminar-tarea") {
 		const idTarea = parseInt(e.target.parentElement.getAttribute("data-id"));
 		if (e.target.parentElement.classList.contains("bg-red")) {
 			arrayTareas = arrayTareas.map((tarea) => {
 				if (idTarea === tarea.id) {
 					tarea.bgColor = "bg-green";
+					tarea.estado = "terminada";
 					return tarea;
 				} else {
 					return tarea;
@@ -77,14 +83,24 @@ const terminarTarea = (e) => {
 			arrayTareas = arrayTareas.map((tarea) => {
 				if (idTarea === tarea.id) {
 					tarea.bgColor = "bg-red";
+					tarea.estado = "pendiente";
 					return tarea;
 				} else {
 					return tarea;
 				}
 			});
 		}
-		console.log(arrayTareas);
-		mostrarTareas();
+		addTasksDB();
+		showDB();
+	}
+};
+const addTasksDB = () => {
+	localStorage.setItem("tareas", JSON.stringify(arrayTareas));
+	resetForm();
+};
+const getTasksDB = () => {
+	if (localStorage.getItem("tareas")) {
+		arrayTareas = JSON.parse(localStorage.getItem("tareas"));
 	}
 };
 // Variables
@@ -95,9 +111,10 @@ const listaTareas = document.querySelector("#lista-tareas");
 const btnBorrar = document.querySelector("#borrar");
 
 const loadEventListeners = () => {
-	input.addEventListener("blur", validarInput);
-	formulario.addEventListener("submit", agregarTarea);
-	listaTareas.addEventListener("click", borrarTarea);
-	listaTareas.addEventListener("click", terminarTarea);
+	input.addEventListener("blur", deleteMsjError);
+	formulario.addEventListener("submit", addTask);
+	listaTareas.addEventListener("click", deleteTask);
+	listaTareas.addEventListener("click", modifyTask);
 };
-document.addEventListener("DOMContentLoaded", iniciarApp);
+loadEventListeners();
+document.addEventListener("DOMContentLoaded", startApp);

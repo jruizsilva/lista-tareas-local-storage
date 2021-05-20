@@ -22,24 +22,29 @@
 		<header class="header">
 			<h1 class="titulo">Lista Tareas</h1>
 		</header>
-		<main class="main">
+		<main class="main" id="main">
 			<form action="" class="form" id="form">
 				<div class="campo">
 					<input type="text" id="input" name="input" class="input" />
 				</div>
 				<button type="submit" class="submit" id="submit">Agregar Tarea</button>
 			</form>
-			<section class="section">
+			<section class="section" id="section">
 				<ul class="lista-tareas" id="lista-tareas"></ul>
 			</section>
 		</main>
-		<template id="template">
+		<template id="template-tarea">
 			<li class="tarea" id="tarea" data-id="">
 				<p class="paragraph" id="paragraph">Hacer ejercicio</p>
 
 				<span class="material-icons done-icon" id="terminar-tarea">done</span>
-				<a class="material-icons close-icon" id="borrar">close</a>
+				<a class="material-icons close-icon" id="borrar">delete</a>
 			</li>
+		</template>
+		<template id="template-error">
+			<div class="error" id="error">
+				Rellene el campo antes de agregar una nueva tarea
+			</div>
 		</template>
 		<script src="js/app.js"></script>
 	</body>
