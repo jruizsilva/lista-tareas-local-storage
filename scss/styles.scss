@@ -1,0 +1,113 @@
+@import "variables";
+@import "mixins";
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+// Clases JS
+.opacity-50 {
+	opacity: 0.5;
+}
+.cursor-not-allowed {
+	cursor: not-allowed;
+}
+.cursor-allowed {
+	cursor: pointer;
+}
+body {
+	background-color: $light-white;
+}
+.header {
+	.titulo {
+		text: {
+			align: center;
+		}
+		font: {
+			family: $fuente;
+			weight: 400;
+		}
+	}
+}
+.main {
+	width: 90%;
+	margin: 0 auto;
+	@media screen and (min-width: 500px) {
+		max-width: 450px;
+	}
+	.form {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 24px;
+		.campo {
+			display: flex;
+			flex-direction: column;
+			.input {
+				padding: 8px;
+				outline: none;
+				border: 1px solid #ccc;
+				border-radius: 3px;
+				font: {
+					family: $fuente;
+				}
+			}
+			margin-bottom: 10px;
+		}
+		.submit {
+			align-self: flex-end;
+			padding: 8px;
+			background-color: $light-blue;
+			border: 0;
+			border-radius: 3px;
+			color: white;
+			text-transform: uppercase;
+			font-weight: 500;
+			font: {
+				family: $fuente;
+			}
+		}
+	}
+	.section {
+		.lista-tareas {
+			padding-left: 0;
+			list-style: none;
+			.tarea {
+				display: flex;
+				align-items: center;
+				margin-bottom: 16px;
+				@include tareaEnCurso;
+				.paragraph {
+					margin: 0;
+				}
+				.done-icon {
+					margin-left: auto;
+					margin-right: 8px;
+					color: $light-green;
+					&:hover {
+						cursor: pointer;
+						color: $green;
+					}
+				}
+				.close-icon {
+					color: $light-red;
+					&:hover {
+						cursor: pointer;
+						color: $red;
+					}
+				}
+			}
+			// Clases para JS
+			.bg-red {
+				border: 1px solid $light-red;
+				color: $red;
+				background-color: $bg-red;
+			}
+			.bg-green {
+				border: 1px solid $light-green;
+				background-color: $bg-green;
+				color: $green;
+			}
+		}
+	}
+}

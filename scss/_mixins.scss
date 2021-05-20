@@ -1,0 +1,22 @@
+@mixin tareaEnCurso {
+	border-radius: 3px;
+	border: 1px solid $light-red;
+	color: $red;
+	background-color: $bg-red;
+	padding: 10px;
+	font: {
+		family: $fuente;
+		weight: 500;
+	}
+}
+@mixin tareaTerminada {
+	border: 1px solid $light-green;
+	background-color: $bg-green;
+	color: $green;
+	border-radius: 3px;
+	padding: 10px;
+	font: {
+		family: $fuente;
+		weight: 500;
+	}
+}

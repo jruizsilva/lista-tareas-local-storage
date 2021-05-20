@@ -1,0 +1,141 @@
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-allowed {
+  cursor: pointer;
+}
+
+body {
+  background-color: #f4f3f3;
+}
+
+.header .titulo {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+}
+
+.main {
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 500px) {
+  .main {
+    max-width: 450px;
+  }
+}
+
+.main .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.main .form .campo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.main .form .campo .input {
+  padding: 8px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-family: "Raleway", sans-serif;
+}
+
+.main .form .submit {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding: 8px;
+  background-color: #29a7f0;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+}
+
+.main .section .lista-tareas {
+  padding-left: 0;
+  list-style: none;
+}
+
+.main .section .lista-tareas .tarea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 16px;
+  border-radius: 3px;
+  border: 1px solid #bd5d69;
+  color: #9c1928;
+  background-color: rgba(128, 0, 0, 0.1);
+  padding: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+}
+
+.main .section .lista-tareas .tarea .paragraph {
+  margin: 0;
+}
+
+.main .section .lista-tareas .tarea .done-icon {
+  margin-left: auto;
+  margin-right: 8px;
+  color: #59af88;
+}
+
+.main .section .lista-tareas .tarea .done-icon:hover {
+  cursor: pointer;
+  color: rgba(9, 129, 75, 0.925);
+}
+
+.main .section .lista-tareas .tarea .close-icon {
+  color: #bd5d69;
+}
+
+.main .section .lista-tareas .tarea .close-icon:hover {
+  cursor: pointer;
+  color: #9c1928;
+}
+
+.main .section .lista-tareas .bg-red {
+  border: 1px solid #bd5d69;
+  color: #9c1928;
+  background-color: rgba(128, 0, 0, 0.1);
+}
+
+.main .section .lista-tareas .bg-green {
+  border: 1px solid #59af88;
+  background-color: rgba(0, 128, 0, 0.1);
+  color: rgba(9, 129, 75, 0.925);
+}
+/*# sourceMappingURL=styles.css.map */
