@@ -8,6 +8,6 @@
 
 ## Contact
 
-- Website jruizsilva.netlify.app
-- GitHub @jruizsilva
-- Twitter @jnt077
+- Website [jruizsilva.netlify.app](https://jruizsilva.netlify.app)
+- GitHub [@jruizsilva](https://github.com/jruizsilva)
+- Twitter [@jnt077](https://twitter.com/jnt077)
